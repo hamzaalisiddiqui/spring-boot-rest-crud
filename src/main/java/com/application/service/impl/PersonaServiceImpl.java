@@ -56,5 +56,10 @@ public class PersonaServiceImpl implements PersonalInfoService {
 			}
 		throw new PersonalInfoNotFoundException("No Such Record Exists");
 	}
+	
+	@Override
+	public void deletePersona(Integer id) {
+		personalInfoList.remove(findOneById(id));
+	}
 
 }

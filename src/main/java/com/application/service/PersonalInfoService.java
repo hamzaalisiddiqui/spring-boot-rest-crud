@@ -20,4 +20,6 @@ public interface PersonalInfoService {
 
 	PersonalInfo editPersona(PersonalInfo personalInfo);
 
+	void deletePersona(Integer id);
+
 }

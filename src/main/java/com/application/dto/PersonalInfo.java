@@ -26,7 +26,7 @@ public class PersonalInfo {
 	private String lastName;
 	
 	@NotBlank(message="lastName is required and should containd alphabets only")
-	@Pattern(regexp="[A-Za-z0-9]+",message="address should contain alphanumeric characters only") 
+	@Pattern(regexp="[A-Za-z0-9 ]+",message="address should contain alphanumeric characters only") 
 	private String address;
 	
 	@NotBlank(message="simplePhoneNumber is required and should contain numeric only")
@@ -34,7 +34,7 @@ public class PersonalInfo {
 	private String simplePhoneNumber;
 	
 	@NotNull
-	@EnumValidator(enumClass=HairColor.class, ignoreCase=true)
+	@EnumValidator(enumClass=HairColor.class, ignoreCase=true, message="hairColor value is incorrect")
 	private String hairColor;
 
 	public Integer getId() {

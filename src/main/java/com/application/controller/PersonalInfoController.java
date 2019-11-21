@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +35,7 @@ public class PersonalInfoController {
 	private static final String API_FETCH_PERSONAL_INFO = "/personalInfo/{id}";
 	private static final String API_ADD_PERSONAL_INFO = "/personalInfo";
 	private static final String API_EDIT_PERSONAL_INFO = "/personalInfo";
+	private static final String API_DELETE_PERSONAL_INFO = "/personalInfo/{id}";
 
 	@Autowired
 	PersonalInfoService personaController;
@@ -69,6 +71,14 @@ public class PersonalInfoController {
 	public ResponseEntity<BaseResponse<?>> editPersona(@RequestBody @Valid final PersonalInfo requestPersona) {
 		PersonalInfo persona = personaController.editPersona(requestPersona);
 		final BaseResponse<?> response = new BaseResponse<PersonalInfo>(true, "Personal info updated successfully", persona);
+		return new ResponseEntity<BaseResponse<?>>(response, HttpStatus.OK);
+
+	}
+	
+	@DeleteMapping({ API_DELETE_PERSONAL_INFO })
+	public ResponseEntity<BaseResponse<?>> deletePersona(@PathVariable @NotBlank int id) {
+		personaController.deletePersona(id);
+		final BaseResponse<?> response = new BaseResponse<String>(true, "Personal info deleted successfully", null);
 		return new ResponseEntity<BaseResponse<?>>(response, HttpStatus.OK);
 
 	}
