@@ -2,6 +2,7 @@ package com.application.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,6 +31,7 @@ public class PersonalInfoController {
 
 	private static final String API_FETCH_ALL_PERSONAL_INFO = "/personalInfo";
 	private static final String API_FETCH_PERSONAL_INFO = "/personalInfo/{id}";
+	private static final String API_ADD_PERSONAL_INFO = "/personalInfo";
 
 	@Autowired
 	PersonalInfoService personaController;
@@ -51,4 +55,12 @@ public class PersonalInfoController {
 
 	}
 
+	@PostMapping({ API_ADD_PERSONAL_INFO })
+	public ResponseEntity<BaseResponse<?>> addPersona(@RequestBody @Valid final PersonalInfo requestPersona) {
+		PersonalInfo persona = personaController.addPersona(requestPersona);
+		final BaseResponse<?> response = new BaseResponse<PersonalInfo>(true, "Data Fetched Successfully", persona);
+		return new ResponseEntity<BaseResponse<?>>(response, HttpStatus.CREATED);
+
+	}
+	
 }

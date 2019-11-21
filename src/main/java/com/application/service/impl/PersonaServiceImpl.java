@@ -39,4 +39,10 @@ public class PersonaServiceImpl implements PersonalInfoService {
 		throw new PersonalInfoNotFoundException("No Such Record Exists");
 	}
 
+	@Override
+	public PersonalInfo addPersona(PersonalInfo personalInfo) {
+		personalInfo.setId(++counter);
+		personalInfoList.add(personalInfo);
+		return personalInfo;
+	}
 }

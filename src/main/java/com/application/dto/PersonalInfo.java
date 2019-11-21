@@ -1,5 +1,12 @@
 package com.application.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import com.application.enums.HairColor;
+import com.application.validator.EnumValidator;
+
 /**
  * @author Hamza Ali iddiqui
  * @version 1.0
@@ -9,15 +16,25 @@ package com.application.dto;
 public class PersonalInfo {
 
 	private Integer id;
-
+	
+	@NotBlank(message="name is required and should containd alphabets only")
+	@Pattern(regexp = "[A-Za-z]+",message="lastName should contain alphabets only")
 	private String name;
-
+	
+	@NotBlank(message="lastName is required and should containd alphabets only")
+	@Pattern(regexp = "[A-Za-z]+",message="lastName should contain alphabets only")
 	private String lastName;
-
+	
+	@NotBlank(message="lastName is required and should containd alphabets only")
+	@Pattern(regexp="[A-Za-z0-9]+",message="address should contain alphanumeric characters only") 
 	private String address;
-
+	
+	@NotBlank(message="simplePhoneNumber is required and should contain numeric only")
+	@Pattern(regexp="[0-9]+",message="simplePhoneNumber should contain numeric characters only")
 	private String simplePhoneNumber;
-
+	
+	@NotNull
+	@EnumValidator(enumClass=HairColor.class, ignoreCase=true)
 	private String hairColor;
 
 	public Integer getId() {
