@@ -3,6 +3,7 @@ package com.application.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.application.dto.PersonalInfo;
@@ -45,4 +46,15 @@ public class PersonaServiceImpl implements PersonalInfoService {
 		personalInfoList.add(personalInfo);
 		return personalInfo;
 	}
+
+	@Override
+	public PersonalInfo editPersona(PersonalInfo personalInfo) {
+		for (PersonalInfo persona : personalInfoList)
+			if (persona.getId() == personalInfo.getId()) {
+				BeanUtils.copyProperties(personalInfo, persona);
+				return personalInfo;
+			}
+		throw new PersonalInfoNotFoundException("No Such Record Exists");
+	}
+
 }

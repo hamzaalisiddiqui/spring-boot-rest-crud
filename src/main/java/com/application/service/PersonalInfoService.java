@@ -15,7 +15,9 @@ public interface PersonalInfoService {
 	List<PersonalInfo> findAll();
 
 	PersonalInfo findOneById(int id);
-	
+
 	PersonalInfo addPersona(PersonalInfo persona);
+
+	PersonalInfo editPersona(PersonalInfo personalInfo);
 
 }
